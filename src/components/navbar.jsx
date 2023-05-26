@@ -1,7 +1,31 @@
 import React from 'react'
 import { Link } from "react-router-dom";
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
+
+
 
 function Navbar() {
+
+
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+      setOpen(true);
+    };
+
+
+
+    const handleClose = (event, reason) => {
+        if (reason && reason === "backdropClick") 
+            return;
+            setOpen(false);
+    }
+
   return (
     <>
      {/*  <!-- Header Section Begin --> */}
@@ -27,7 +51,10 @@ function Navbar() {
                             </div>
                         
                             <div className="header__top__right__auth">
-                                <a href="/"><i className="fa-solid fa-user"></i> Login</a>
+                                {/* <a href="/"><i className="fa-solid fa-user"></i> Login</a> */}
+                                <Button variant="outlined" onClick={handleClickOpen}>
+                                    Open form dialog
+                                </Button>
                             </div>
                         </div>
                     </div>
@@ -121,7 +148,39 @@ function Navbar() {
                             <i class="fa-solid fa-user"></i>
                             </div>
                             <div className="hero__search__phone__text">
-                            <button type="submit" className="site-btn">Login</button>
+                            <button type="submit" className="site-btn" onClick={handleClickOpen}>Login</button>
+                            {/* <Button  className="site-btn" onClick={handleClickOpen}  variant="contained">Login</Button> */}
+
+                            <Dialog open={open} onClose={handleClose }  aria-labelledby="simple-dialog-title" >
+                                <DialogTitle>Login</DialogTitle>
+                                        <DialogContent>
+                                        
+                                        <TextField
+                                            autoFocus
+                                            margin="dense"
+                                            id="name"
+                                            label="Email Address"
+                                            type="email"
+                                            fullWidth
+                                            variant="outlined"
+                                        />
+                                        
+                                        <TextField
+                                            autoFocus
+                                            margin="dense"
+                                            id="password"
+                                            label="Password"
+                                            type="password"
+                                            fullWidth
+                                            variant="outlined"
+                                        />
+
+                                        </DialogContent>
+                                        <DialogActions>
+                                        <Button onClick={handleClose}>Close</Button>
+                                        <Button onClick={handleClose}>Login</Button>
+                                        </DialogActions>
+                            </Dialog>
                             </div>
                         </div>
                     </div>

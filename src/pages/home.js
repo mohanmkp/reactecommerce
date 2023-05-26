@@ -8,7 +8,7 @@ function Home() {
     const [data, setData] = useState(null);
    
     useEffect(() => {
-        axios.get('http://127.0.0.1:8000/product/')
+        axios.get('http://54.236.250.116:8000/product/')
           .then(response => {
             setData(response.data);
             console.log(response.data)
